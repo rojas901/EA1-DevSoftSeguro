@@ -21,6 +21,7 @@ import java.util.List;
 public class FuncionarioDAO {
     
     private static final String GET_FUNCIONARIOS = "select * from funcionario";
+    private static final String GET_FUNCIONARIOS2 = "select f.idfuncionario, f.fktipoidentificacion, f.fkestadocivil, f.fksexo, t.nombre as tipoidentificacion, e.nombre as estadocivil, s.nombre as sexo, f.nombre, f.apellido, f.numeroidentificacion, f.direccion, f.fechanacimiento, f.telefono from funcionario f inner join tipoidentificacion t on t.idtipoidentificacion = f.fktipoidentificacion inner join estadocivil e on e.idestadocivil = f.fkestadocivil inner join sexo s on s.idsexo = f.fksexo";
     private static final String CREATE_FUNCIONARIO = "insert into funcionario(fktipoidentificacion, fkestadocivil, fksexo, nombre, apellido, numeroidentificacion, direccion, fechanacimiento, telefono) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_FUNCIONARIO_BY_ID = "select * from funcionario where idfuncionario = ?";
     private static final String UPDATE_FUNCIONARIO = "update funcionario set fktipoidentificacion = ?, fkestadocivil = ?, fksexo = ?, nombre = ?, apellido= ?, numeroidentificacion= ?, direccion = ?, fechanacimiento= ?, telefono = ? where idfuncionario = ?";
@@ -76,6 +77,56 @@ public class FuncionarioDAO {
                 funcionario.setFkTipoIdentificacion(resultSet.getInt("fktipoidentificacion"));
                 funcionario.setFkEstadoCivil(resultSet.getInt("fkestadocivil"));
                 funcionario.setFkSexo(resultSet.getInt("fksexo"));
+                funcionario.setNombre(resultSet.getString("nombre"));
+                funcionario.setApellido(resultSet.getString("apellido"));
+                funcionario.setNumeroIdentificacion(resultSet.getString("numeroidentificacion"));
+                funcionario.setDireccion(resultSet.getString("direccion"));
+                funcionario.setFechaNacimiento(resultSet.getDate("fechanacimiento"));
+                funcionario.setTelefono(resultSet.getString("telefono"));
+                funcionarios.add(funcionario);
+            }
+            
+            return funcionarios;
+            
+        } finally {
+            
+            if (connection != null) {
+                connection.close();
+            }
+            
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            
+        }
+    }
+    
+    public List<Funcionario> listarFuncionarios2() throws SQLException {
+    
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        List<Funcionario> funcionarios = new ArrayList<>();
+        
+        try{
+            connection = ConnectionUtil.getConnection();
+            preparedStatement = connection.prepareStatement(GET_FUNCIONARIOS2);
+            resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                Funcionario funcionario = new Funcionario();
+                funcionario.setIdFuncionario(resultSet.getInt("idfuncionario"));
+                funcionario.setFkTipoIdentificacion(resultSet.getInt("fktipoidentificacion"));
+                funcionario.setFkEstadoCivil(resultSet.getInt("fkestadocivil"));
+                funcionario.setFkSexo(resultSet.getInt("fksexo"));
+                funcionario.setNombreTipoIdentificacion(resultSet.getString("tipoidentificacion"));
+                funcionario.setNombreEstadoCivil(resultSet.getString("estadocivil"));
+                funcionario.setNombreSexo(resultSet.getString("sexo"));
                 funcionario.setNombre(resultSet.getString("nombre"));
                 funcionario.setApellido(resultSet.getString("apellido"));
                 funcionario.setNumeroIdentificacion(resultSet.getString("numeroidentificacion"));

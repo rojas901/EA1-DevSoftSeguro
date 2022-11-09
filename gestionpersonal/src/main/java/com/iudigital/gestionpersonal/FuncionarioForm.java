@@ -52,7 +52,7 @@ public class FuncionarioForm extends javax.swing.JFrame {
         tblFuncionarios.setModel(defaultTableModel);
         
         try {
-            List<Funcionario> funcionarios = funcionarioController.obtenerFuncionarios();
+            List<Funcionario> funcionarios = funcionarioController.obtenerFuncionarios2();
             
             if (funcionarios.isEmpty()) {
                 return;
@@ -62,9 +62,9 @@ public class FuncionarioForm extends javax.swing.JFrame {
             int row = 0;
             for (Funcionario funcionario: funcionarios) {
                 defaultTableModel.setValueAt(funcionario.getIdFuncionario(), row, 0);
-                defaultTableModel.setValueAt(funcionario.getFkTipoIdentificacion(), row, 1);
-                defaultTableModel.setValueAt(funcionario.getFkEstadoCivil(), row, 2);
-                defaultTableModel.setValueAt(funcionario.getFkSexo(), row, 3);
+                defaultTableModel.setValueAt(funcionario.getNombreTipoIdentificacion(), row, 1);
+                defaultTableModel.setValueAt(funcionario.getNombreEstadoCivil(), row, 2);
+                defaultTableModel.setValueAt(funcionario.getNombreSexo(), row, 3);
                 defaultTableModel.setValueAt(funcionario.getNombre(), row, 4);
                 defaultTableModel.setValueAt(funcionario.getApellido(), row, 5);
                 defaultTableModel.setValueAt(funcionario.getNumeroIdentificacion(), row, 6);

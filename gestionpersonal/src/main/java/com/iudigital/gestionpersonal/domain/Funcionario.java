@@ -16,6 +16,9 @@ public class Funcionario {
     private int fkTipoIdentificacion;
     private int fkEstadoCivil;
     private int fkSexo;
+    private String nombreTipoIdentificacion;
+    private String nombreEstadoCivil;
+    private String nombreSexo;
     private String nombre;
     private String apellido;
     private String numeroIdentificacion;
@@ -54,6 +57,30 @@ public class Funcionario {
     public void setFkSexo(int fkSexo) {
         this.fkSexo = fkSexo;
     }
+
+    public String getNombreTipoIdentificacion() {
+        return nombreTipoIdentificacion;
+    }
+
+    public void setNombreTipoIdentificacion(String nombreTipoIdentificacion) {
+        this.nombreTipoIdentificacion = nombreTipoIdentificacion;
+    }
+
+    public String getNombreEstadoCivil() {
+        return nombreEstadoCivil;
+    }
+
+    public void setNombreEstadoCivil(String nombreEstadoCivil) {
+        this.nombreEstadoCivil = nombreEstadoCivil;
+    }
+
+    public String getNombreSexo() {
+        return nombreSexo;
+    }
+
+    public void setNombreSexo(String nombreSexo) {
+        this.nombreSexo = nombreSexo;
+    }   
 
     public String getNombre() {
         return nombre;

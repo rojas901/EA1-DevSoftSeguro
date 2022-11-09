@@ -30,6 +30,10 @@ public class FuncionarioController {
         return funcionarioDao.listarFuncionarios();
     }
     
+    public List<Funcionario> obtenerFuncionarios2() throws SQLException {
+        return funcionarioDao.listarFuncionarios2();
+    }
+    
     public Funcionario obtenerFuncionario(int idFuncionario) throws SQLException {
         return funcionarioDao.obtenerFuncionario(idFuncionario);
     }
